@@ -151,7 +151,24 @@ def overdue():
 
     return render_template("loans.html", loans=loans)
 
+
+@app.route('/init-data')
+def init_data():
+    # Only allow this if no books exist to prevent duplicates
+    if Book.query.count() == 0:
+        from populate_books import add_dummy_books
+        add_dummy_books()
+        return "20 Books Added Successfully!"
+    return "Database already has data."
+
+
 if __name__ == "__main__":
-    # Use the port assigned by the server, or default to 5000 locally
+    # This block handles the database creation automatically for Free Tier users
+    with app.app_context():
+        import models
+        db.create_all()
+        print("Database initialized successfully!")
+
+    # Standard Render deployment port logic
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
