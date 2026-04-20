@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>{% if current_user.role == 'admin' %}All Loan Records{% else %}My Issued Books{% endif %}</h2>
+    <a href="/overdue" class="btn btn-outline-danger btn-sm">Show Overdue Only</a>
+</div>
+
+<div class="table-responsive bg-white p-3 rounded shadow-sm border">
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Loan ID</th>
+                <th>Book ID</th>
+                <th>Issue Date</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for loan in loans %}
+            <tr>
+                <td>#{{ loan.id }}</td>
+                <td>Book #{{ loan.book_id }}</td>
+                <td>{{ loan.issue_date.strftime('%Y-%m-%d') }}</td>
+                <td><span class="text-danger fw-bold">{{ loan.due_date.strftime('%Y-%m-%d') }}</span></td>
+                <td>
+                    {% if loan.return_date %}
+                        <span class="badge bg-success">Returned on {{ loan.return_date.strftime('%Y-%m-%d') }}</span>
+                    {% else %}
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not loan.return_date %}
+                        <a href="/return/{{ loan.id }}" class="btn btn-sm btn-primary">Return Now</a>
+                    {% else %}
+                        <button class="btn btn-sm btn-secondary" disabled>Completed</button>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center text-muted py-4">No loan history found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

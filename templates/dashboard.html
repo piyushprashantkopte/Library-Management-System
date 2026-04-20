@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="p-5 mb-4 bg-white rounded-3 shadow-sm border">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Welcome, {{ current_user.name }}!</h1>
+        <p class="col-md-8 fs-4 text-muted">You are logged in as an <strong>{{ current_user.role }}</strong>. Manage your library books, track your loans, and check for overdue returns from your dashboard.</p>
+        <hr class="my-4">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="/books" class="btn btn-primary btn-lg px-4 me-md-2">Browse Books</a>
+            <a href="/loans" class="btn btn-outline-secondary btn-lg px-4">My Loans</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

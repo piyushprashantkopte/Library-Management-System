@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/books">Books</a></li>
+                <li class="breadcrumb-item active">Add New Book</li>
+            </ol>
+        </nav>
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-dark text-white">
+                <h4 class="mb-0 py-2">Book Information</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Book Title</label>
+                        <input name="title" type="text" class="form-control" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Author</label>
+                            <input name="author" type="text" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Genre</label>
+                            <input name="genre" type="text" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Publication Year</label>
+                            <input name="year" type="number" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label">Available Copies</label>
+                            <input name="copies" type="number" class="form-control" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Add Book to Library</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
