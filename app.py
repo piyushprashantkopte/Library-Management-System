@@ -163,12 +163,12 @@ def init_data():
 
 
 if __name__ == "__main__":
-    # This block handles the database creation automatically for Free Tier users
+    # This block ensures the database and tables are created on Render
     with app.app_context():
-        import models
+        import models # Ensure models are loaded
         db.create_all()
-        print("Database initialized successfully!")
+        print("Database tables created successfully!")
 
-    # Standard Render deployment port logic
+    # Standard Render deployment logic
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
